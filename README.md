@@ -24,7 +24,11 @@ This project provides a solution for aligning subtitles with audio/video content
 
 ```bash
 git clone https://github.com/PlanetRead/Auto-Subtitler-whisper-model.git/
-cd Auto-Subtitler-whisper-model
+mv Auto-Subtitler-whisper-model subtitle-alignment
+cd subtitle-alignment
+
+conda create -n alignment python=3.10.16
+conda activate alignment
 pip install -r requirements.txt
 ```
 
