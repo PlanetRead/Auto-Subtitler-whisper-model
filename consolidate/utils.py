@@ -251,3 +251,32 @@ def read_ground_truth_file(file_path: str) -> str:
     with open(file_path, "r", encoding="utf-8") as file:
         ground_truth = file.read()
     return ground_truth
+
+def srt_to_text(srt_file_path, output_text_path=None):
+    """
+    Convert an SRT subtitle file to plain text using pysrt library.
+    Handles Punjabi text with multiple spaces between words and preserves line breaks.
+    
+    Args:
+        srt_file_path (str): Path to the input SRT file
+        output_text_path (str, optional): Path for the output text file. 
+            If None, will use the same name as input with .txt extension
+    
+    Returns:
+        str: Path to the created text file
+    """
+    if output_text_path is None:
+        output_text_path = srt_file_path.rsplit(".", 1)[0] + ".txt"
+
+    # Load the SRT file
+    subs = pysrt.open(srt_file_path, encoding="utf-8")
+
+    # Extract text from each subtitle
+    text_lines = [" ".join(sub.text.split()) for sub in subs]
+
+    # Write the extracted text to the output file
+    with open(output_text_path, "w", encoding="utf-8") as text_file:
+        text_file.write("\n".join(text_lines))
+
+    print(f"Text extracted from SRT file and saved to: {output_text_path}")
+    return output_text_path

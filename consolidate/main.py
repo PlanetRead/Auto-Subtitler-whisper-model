@@ -29,17 +29,11 @@ def main():
         required=False, 
         help="Path to the subtitle file (.srt) [Optional]",
     )
-    parser.add_argument(
-        "--text_file", 
-        required=False, 
-        help="Path to the subtitle file (.txt) [Optional]",
-    )
 
     # Parse the arguments
     args = parser.parse_args()
     audio_file_path = args.audio_file
     srt_file_path = args.srt_file
-    text_file_path = args.text_file
 
     try:
         # Validate the audio file
@@ -49,13 +43,10 @@ def main():
 
         # Validate the SRT file if provided
         if srt_file_path:
-            if not text_file_path:
-                raise ValueError("Error: Text file must be provided with SRT file.")
 
             srt_file = validate_file(srt_file_path, ['.srt'], 'subtitle file')
-            text_file = validate_file(text_file_path, ['.txt'], 'text file')
-            logger.info(f"SRT file validated: {srt_file} and Text file validated: {text_file}")
-            print(f"SRT file validated: {srt_file} and Text file validated: {text_file}")
+            logger.info(f"SRT file validated: {srt_file}")
+            print(f"SRT file validated: {srt_file}")
         else:
             logger.info("No SRT file provided. Proceeding with audio file only.")
             print("No SRT file provided. Proceeding with audio file only.")
@@ -79,7 +70,7 @@ def main():
             json.dump(result, f, ensure_ascii=False, indent=4)
 
         if srt_file_path:
-            calculate_error_rate(srt_file=srt_file, text_file=text_file, json_file=json_path, base_name=base_name)
+            calculate_error_rate(srt_file=srt_file, json_file=json_path, base_name=base_name)
         logger.info("Inference completed successfully.")
 
     except ValueError as e:

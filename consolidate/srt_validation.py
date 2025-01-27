@@ -7,20 +7,19 @@ from pathlib import Path
 
 from consolidate.logger import logger
 from consolidate.aligner import EnhancedTranscriptAligner
-from consolidate.utils import calculate_subtitle_error_rate, generate_srt_file_output, load_segments_from_json, read_ground_truth_file
+from consolidate.utils import calculate_subtitle_error_rate, generate_srt_file_output, load_segments_from_json, read_ground_truth_file, srt_to_text
 
 # Define paths
 base_path = Path("temp")
 os.makedirs(base_path, exist_ok=True)
 results_path = base_path / "Results"
 
-def calculate_error_rate(srt_file: str, text_file: str, json_file: str, base_name: str):
+def calculate_error_rate(srt_file: str, json_file: str, base_name: str):
     """
     This function will be used to calculate the error rate of the subtitle alignment.
     """
 
     json_path = json_file
-    file_transcript_path =  text_file
 
     # Results files - Alignment
     alignment_word_level_path = results_path / "Alignment" / "Word_level"
@@ -36,8 +35,8 @@ def calculate_error_rate(srt_file: str, text_file: str, json_file: str, base_nam
     pred_aligned_srt_path = alignment_word_level_path / f"{base_name}.srt"
     gt_aligned_srt_path = srt_file
 
-
-    ground_truth_text = read_ground_truth_file(file_transcript_path)
+    text_file = srt_to_text(srt_file)
+    ground_truth_text = read_ground_truth_file(text_file)
     results, _, updated_pred_sentences = EnhancedTranscriptAligner(similarity_threshold=0.75).align_predicted_sentences(ground_truth_text, pred_srt_sentences)
 
     generate_srt_file_output(
@@ -46,7 +45,7 @@ def calculate_error_rate(srt_file: str, text_file: str, json_file: str, base_nam
         alignment_word_level_path / f"{base_name}.srt",
         alignment_sentence_level_path / f"{base_name}.srt"
     )
-    print(f"Aligned GT transcript saved as {base_name}_Word_level.srt")
+    print(f"Aligned GT transcript saved as {base_name}.srt in {alignment_word_level_path}")
 
 
     calculate_subtitle_error_rate(pred_aligned_srt_path, gt_aligned_srt_path)
