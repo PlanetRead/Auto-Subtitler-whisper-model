@@ -1,3 +1,9 @@
+"""
+This module contains functions for validation like file validation.
+
+All rights reserved.
+"""
+
 import os
 
 from consolidate.logger import logger

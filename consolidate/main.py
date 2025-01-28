@@ -1,3 +1,8 @@
+"""
+This is the main file to execute the Whisper Inference and SRT validation process.
+
+All rights reserved.
+"""
 
 import json
 import sys

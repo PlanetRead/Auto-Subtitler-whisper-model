@@ -1,3 +1,10 @@
+"""
+This file contains the logic for the alignment and evaluation of a predicted transcript with a ground truth text.
+
+All rights reserved.
+"""
+
+
 import numpy as np
 from typing import List, Tuple
 from Levenshtein import distance as levenshtein_distance

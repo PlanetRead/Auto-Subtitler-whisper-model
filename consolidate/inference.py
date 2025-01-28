@@ -1,3 +1,9 @@
+"""
+This file contains the code for the inference of the openai whisper model
+
+All rights reserved.
+"""
+
 import os
 import sys
 

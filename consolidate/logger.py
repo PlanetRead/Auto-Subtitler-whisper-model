@@ -1,3 +1,9 @@
+""""
+This module configures the logging for the application.
+
+All rights reserved.
+"""
+
 import logging
 from datetime import datetime
 

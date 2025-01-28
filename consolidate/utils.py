@@ -1,3 +1,10 @@
+"""
+This module contains utility functions for processing alignment results and generating SRT files.
+
+All rights reserved.
+"""
+
+
 import json
 from typing import List
 import pysrt

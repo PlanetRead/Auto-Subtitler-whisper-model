@@ -1,3 +1,9 @@
+"""
+This file contains the schemas for the data classes used in the consolidation.
+
+All rights reserved.
+"""
+
 from dataclasses import dataclass
 from typing import List
 

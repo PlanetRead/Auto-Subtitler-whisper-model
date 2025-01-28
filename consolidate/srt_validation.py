@@ -1,3 +1,9 @@
+"""
+This file contains the logic for calculates Subtitle Error Rate (SER) by comparing word-level and sentence-level SRT files.
+
+All rights reserved.
+"""
+
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
