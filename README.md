@@ -37,3 +37,15 @@ pip install -r requirements.txt
 ```bash
 python main.py
 ```
+
+
+# Consolidate Pipeline
+
+This pipeline will be used to inference the whisper model and if user have .srt and text file of the ground truth,
+this pipeline can be used to calculate the error rate.
+
+```bash
+python consolidate\main.py --audio_file <audio_file_path> [--srt_file <srt_file_path>] [--text_file <text_file_path>]
+```
+
+SRT file and Text files are optional, If the SRT file is provided then the text file must be provided.
